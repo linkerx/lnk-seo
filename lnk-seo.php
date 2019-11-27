@@ -27,7 +27,7 @@ function fpw_post_info( $id, $post ) {
         }
     }
     $slug = $post->post_name;
-    $url = getenv('FRONTEND_URL').$site.$type.$cat.$slug;
+    $url = getenv('FRONTEND_URL')."/".$site.$type.$cat.$slug;
     $data = array();
     $data['type'] = 'article';
     $data['title'] = $post->post_title;
