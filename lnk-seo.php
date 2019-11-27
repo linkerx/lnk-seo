@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Plugin Name: LNK Legis SEO
+ * Plugin Name: LNK Site SEO
  * Plugin URI: https://github.com/linkerx
- * Description: Cambia la URL de la API para seguridad
+ * Description: Agrega metadatos de articulo en tabla lnk_seo
  * Version: 0.1
  * Author: Diego Martinez Diaz
  * Author URI: https://github.com/linkerx
@@ -27,15 +27,15 @@ function fpw_post_info( $id, $post ) {
         }
     }
     $slug = $post->post_name;
-    $url = "https://web.legisrn.gov.ar/".$site.$type.$cat.$slug;
+    $url = getenv('FRONTEND_URL').$site.$type.$cat.$slug;
     $data = array();
     $data['type'] = 'article';
     $data['title'] = $post->post_title;
     $data['description'] = $post->post_excerpt;
     if (has_post_thumbnail($post)){
-        $image = wp_get_attachment_url(get_post_thumbnail_id($post->ID));
+        $image = get_the_post_thumbnail_url($post->ID,'thumbnail');
     } else {
-        $image = "https://webadmin.legisrn.gov.ar/assets/images/legisrn.jpg";
+        $image = getenv('DEFAULT_IMG_URL');
     }
     $data['image'] = $image;
     $metadata = json_encode($data,JSON_UNESCAPED_UNICODE);
