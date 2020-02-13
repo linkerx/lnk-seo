@@ -30,8 +30,8 @@ function fpw_post_info( $id, $post ) {
     $url = getenv('FRONTEND_URL')."/".$site.$type.$cat.$slug;
     $data = array();
     $data['type'] = 'article';
-    $data['title'] = $post->post_title;
-    $data['description'] = $post->post_excerpt;
+    $data['title'] = htmlentities($post->post_title, ENT_QUOTES);
+    $data['description'] = htmlentities($post->post_excerpt, ENT_QUOTES);
     if (has_post_thumbnail($post)){
         $image = get_the_post_thumbnail_url($post->ID,'thumbnail');
     } else {
